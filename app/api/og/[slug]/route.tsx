@@ -1,13 +1,16 @@
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
 import { invitations } from "@/lib/invitations";
 
 export const runtime = "edge";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { slug: string } }
+  req: NextRequest,
+  context: { params: Promise<{ slug: string }> }
 ) {
-  const data = invitations[params.slug as keyof typeof invitations];
+  const { slug } = await context.params;
+
+  const data = invitations[slug as keyof typeof invitations];
 
   if (!data) {
     return new Response("Not found", { status: 404 });
@@ -27,17 +30,30 @@ export async function GET(
           color: "white",
           fontSize: 60,
           fontWeight: 600,
+          textAlign: "center",
         }}
       >
         <div>
           {data.bride.name} & {data.groom.name}
         </div>
 
-        <div style={{ fontSize: 32, marginTop: 20 }}>
+        <div
+          style={{
+            fontSize: 32,
+            marginTop: 20,
+            opacity: 0.8,
+          }}
+        >
           {data.dateLabel}
         </div>
 
-        <div style={{ fontSize: 22, marginTop: 40 }}>
+        <div
+          style={{
+            fontSize: 22,
+            marginTop: 40,
+            opacity: 0.6,
+          }}
+        >
           Wedding Invitation
         </div>
       </div>
