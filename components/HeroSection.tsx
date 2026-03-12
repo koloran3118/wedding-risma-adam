@@ -4,7 +4,23 @@ import React, { useEffect, useState } from "react";
 import { getCountdown, CountdownResult } from "@/lib/countdown";
 import { motion } from "framer-motion";
 
-export default function HeroSection({ guestName }: { guestName: string }) {
+
+type HeroProps = {
+  guestName: string;
+  bride: string;
+  groom: string;
+  logoImage: string;
+  heroBackground: string;
+  weddingDate: string;
+  weddingDateLabel: string;
+};
+
+export default function HeroSection({
+  logoImage,
+  heroBackground,
+  weddingDate,
+  weddingDateLabel,
+}: HeroProps) {
   const [time, setTime] = useState<CountdownResult>({
     days: 0,
     hours: 0,
@@ -12,22 +28,21 @@ export default function HeroSection({ guestName }: { guestName: string }) {
     seconds: 0,
   });
 
-  const weddingDate = "2025-12-13T08:00:00";
-  const weddingDateLabel = "13.12.2025";
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(getCountdown(weddingDate));
     }, 1000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [weddingDate]);
 
   return (
     <header className="relative w-full min-h-screen h-dvh overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center animate-slowZoom"
-        style={{ backgroundImage: "url('/images/image5.jpeg')" }}
+        style={{ backgroundImage: `url(${heroBackground})` }}
       />
       <div className="absolute inset-0 bg-black/40" />
 
@@ -39,7 +54,7 @@ export default function HeroSection({ guestName }: { guestName: string }) {
         className="absolute top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-8 z-20"
       >
         <img
-          src="/images/logo.png"
+          src={logoImage}
           alt="Logo"
           className="h-15 sm:h-20 md:h-30 w-auto object-contain brightness-0 invert"
         />
@@ -151,4 +166,6 @@ export default function HeroSection({ guestName }: { guestName: string }) {
       `}</style>
     </header>
   );
+  
 }
+

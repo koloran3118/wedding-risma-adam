@@ -1,11 +1,34 @@
 "use client";
 
-import HeroSmall from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSection";
 import { useSearchParams } from "next/navigation";
+import { invitations } from "@/lib/invitations";
 
-export default function InviteHeroClient() {
+type InvitationSlug = keyof typeof invitations;
+
+export default function InviteHeroClient({ slug }: { slug: InvitationSlug }) {
   const params = useSearchParams();
-  const invite = params?.get("invite") ?? "";
+  const invite = params?.get("invite") ?? "Tamu Undangan";
 
-  return <HeroSmall guestName={invite} />;
+  const data = invitations[slug];
+
+  if (!data) {
+    return (
+      <div className="text-center py-20 text-white">
+        Undangan tidak ditemukan
+      </div>
+    );
+  }
+
+  return (
+    <HeroSection
+      guestName={invite}
+      bride={data.bride.name}
+      groom={data.groom.name}
+      logoImage={data.logoImage}
+      heroBackground= {data.heroBackground}
+      weddingDate={data.dateISO}
+      weddingDateLabel={data.dateLabel}
+    />
+  );
 }

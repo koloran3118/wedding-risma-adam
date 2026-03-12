@@ -14,7 +14,7 @@ export default function CountdownSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(getCountdown("2025-12-13T08:00:00"));
+      setTime(getCountdown("2026-03-26T08:00:00"));
     }, 1000);
 
     return () => clearInterval(interval);

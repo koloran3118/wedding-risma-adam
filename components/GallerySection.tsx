@@ -1,15 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { InvitationSlug } from "@/lib/types";
+import { invitations } from "@/lib/invitations";
 
-export function GallerySection() {
+type Props = {
+  slug: InvitationSlug;
+};
+
+export function GallerySection({slug}: Props) {
+
+  const data = invitations[slug];
+  
+  if(!data) return null;
+
   const images = [
-    { src: "/images/image1.jpeg", alt: "Wedding moment 1" },
-    { src: "/images/image2.png", alt: "Wedding moment 2" },
-    { src: "/images/image3.jpeg", alt: "Wedding moment 3" },
-    { src: "/images/image4.jpeg", alt: "Wedding moment 4" },
-    { src: "/images/image5.jpeg", alt: "Wedding moment 5" },
-    { src: "/images/image6.jpeg", alt: "Wedding moment 6" },
+    { src: data.galery.ft1, alt: "Wedding moment 1" },
+    { src: data.galery.ft2, alt: "Wedding moment 2" },
+    { src: data.galery.ft3, alt: "Wedding moment 3" },
+    { src: data.galery.ft4, alt: "Wedding moment 4" },
+    { src: data.galery.ft5, alt: "Wedding moment 5" },
+    { src: data.galery.ft6, alt: "Wedding moment 6" },
   ];
 
   return (

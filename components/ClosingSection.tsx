@@ -1,20 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { InvitationSlug } from "@/lib/types";
+import { invitations } from "@/lib/invitations";
 
-type ClosingSectionProps = {
-  brideGroomNames?: string;
+type Props = {
+  slug: InvitationSlug;
   creatorName?: string;
   instagramUrl?: string;
   whatsappUrl?: string;
 };
 
 export function ClosingSection({
-  brideGroomNames = "Risma & Adam",
+  slug,
   creatorName = "Pakdomm",
   instagramUrl = "https://instagram.com/pakdomm",
   whatsappUrl = "https://wa.me/6281360387771",
-}: ClosingSectionProps) {
+}: Props) {
+
+  const data = invitations[slug];
+
+  if (!data) return null;
+
+  const brideGroomNames = `${data.bride.name} & ${data.groom.name}`;
+
   return (
     <section className="relative w-full bg-black/30 backdrop-blur-sm py-20 px-6 overflow-hidden">
       {/* Glow background */}

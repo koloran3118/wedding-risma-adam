@@ -13,6 +13,14 @@ import {
   QuerySnapshot,
   DocumentData,
 } from "firebase/firestore";
+import { InvitationSlug } from "@/lib/types";
+import { invitations } from "@/lib/invitations";
+import { where, limit } from "firebase/firestore";
+
+
+type Props = {
+  slug: InvitationSlug;
+};
 
 // --------------------
 // TYPES
@@ -28,7 +36,12 @@ type Wish = {
 // --------------------
 // MAIN COMPONENT
 // --------------------
-export function RSVPSection() {
+export function RSVPSection({slug} : Props) {
+  const data = invitations[slug];
+
+  if (!data) {
+    return null;
+  }
   const [submitted, setSubmitted] = useState(false);
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,19 +49,22 @@ export function RSVPSection() {
   // Ambil data ucapan dari Firestore (real-time)
   useEffect(() => {
     const wishesRef = collection(db, "wishes");
-    const q = query(wishesRef, orderBy("createdAt", "desc"));
-
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot: QuerySnapshot<DocumentData>) => {
-        const data: Wish[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Wish, "id">),
-        }));
-        setWishes(data);
-        setLoading(false);
-      }
+    const q = query(
+      wishesRef, 
+      where("slug", "==", slug),
+      orderBy("createdAt", "desc"),
+      limit(30)
     );
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...(doc.data() as Omit<Wish, "id">),
+    }));
+
+    setWishes(data);
+    setLoading(false);
+  });
 
     return () => unsubscribe();
   }, []);
@@ -72,6 +88,7 @@ export function RSVPSection() {
         name,
         message,
         attend,
+        slug,
         createdAt: serverTimestamp(),
       });
 

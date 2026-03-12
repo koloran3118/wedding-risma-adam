@@ -2,8 +2,17 @@
 
 import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
+import { invitations } from "@/lib/invitations";
+import { InvitationSlug } from "@/lib/types";
 
-export function BrideGroomSection() {
+type Props = {
+  slug: InvitationSlug;
+};
+
+export function BrideGroomSection({slug} : Props ) {
+  const data = invitations[slug];
+
+  if(!data) return null;
   return (
     <section className="w-full bg-black/30 backdrop-blur-sm overflow-x-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-10 sm:space-y-12">
@@ -52,8 +61,8 @@ export function BrideGroomSection() {
             "
           >
             <img
-              src="/images/risma.png"
-              alt="Bride"
+              src={data.brideImage}
+              alt={data.bride.name}
               className="w-full h-full object-cover"
             />
 
@@ -72,10 +81,10 @@ export function BrideGroomSection() {
                 "
               >
                 <h1 className="text-base sm:text-lg font-playfair">
-                  RISMA HAYATI
+                  {data.bride.name}
                 </h1>
                 <p className="text-[11px] sm:text-xs">
-                  Putri dari Bapak Hairul Rizal (Yeyek) & Ibu Asnaini (Sias)
+                  {data.bride.parents}
                 </p>
 
                 <a
@@ -90,7 +99,7 @@ export function BrideGroomSection() {
                   "
                 >
                   <Instagram size={16} />
-                  <span>@syugarisss</span>
+                  <span>{data.bride.instagram}</span>
                 </a>
               </div>
             </div>
@@ -116,10 +125,10 @@ export function BrideGroomSection() {
             {/* Detail pengantin – hanya tampil di md+ */}
             <div className="hidden md:flex flex-col space-y-1 text-left">
               <h3 className="text-lg md:text-xl font-playfair">
-                RISMA HAYATI
+                {data.bride.name}
               </h3>
               <p className="text-xs md:text-sm text-white/80 max-w-xs">
-                Putri dari Bapak Hairul Rizal (Yeyek) & Ibu Asnaini (Sias)
+                {data.bride.parents}
               </p>
               <a
                 href="https://instagram.com/syugarisss"
@@ -128,7 +137,7 @@ export function BrideGroomSection() {
                 className="inline-flex items-center mt-2 gap-2 text-xs md:text-sm font-lora hover:text-amber-200 transition-colors"
               >
                 <Instagram size={16} />
-                <span>@syugarisss</span>
+                <span>{data.bride.instagram}</span>
               </a>
             </div>
           </motion.div>
@@ -168,10 +177,10 @@ export function BrideGroomSection() {
             {/* Detail pengantin – hanya md+ */}
             <div className="hidden md:flex flex-col space-y-1 text-left ml-10">
               <h3 className="text-lg md:text-xl font-playfair">
-                M. ADAM RIZKI IRAWAN
+                {data.groom.name}
               </h3>
               <p className="text-xs md:text-sm text-white/80 max-w-xs">
-                Putra dari Bapak Evo Agus Irawan & Ibu Nurhayati Imayasari
+                {data.groom.parents}
               </p>
               <a
                 href="https://instagram.com/pakdomm"
@@ -180,7 +189,7 @@ export function BrideGroomSection() {
                 className="inline-flex items-center mt-2 gap-2 text-xs md:text-sm font-lora hover:text-amber-200 transition-colors"
               >
                 <Instagram size={16} />
-                <span>@pakdomm</span>
+                <span>{data.groom.instagram}</span>
               </a>
             </div>
           </motion.div>
@@ -201,8 +210,8 @@ export function BrideGroomSection() {
             "
           >
             <img
-              src="/images/adam.jpeg"
-              alt="Groom"
+              src={data.groomImage}
+              alt={data.groom.name}
               className="w-full h-full object-cover"
             />
 
@@ -221,10 +230,10 @@ export function BrideGroomSection() {
                 "
               >
                 <h1 className="text-base sm:text-lg font-playfair">
-                  M. ADAM RIZKI IRAWAN
+                  {data.groom.name}
                 </h1>
                 <p className="text-[11px] sm:text-xs">
-                  Putra dari Bapak Evo Agus Irawan & Ibu Nurhayati Imayasari
+                  {data.groom.parents}
                 </p>
 
                 <a
@@ -239,7 +248,7 @@ export function BrideGroomSection() {
                   "
                 >
                   <Instagram size={16} />
-                  <span>@pakdomm</span>
+                  <span>{data.groom.instagram}</span>
                 </a>
               </div>
             </div>

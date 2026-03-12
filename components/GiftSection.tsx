@@ -1,64 +1,75 @@
 "use client";
 
+import { invitations } from "@/lib/invitations";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { InvitationSlug } from "@/lib/types";
+
+
+type Props = {
+  slug: InvitationSlug;
+};
 
 type GiftMethodKey = "transfer" | "qr" | "physical";
 
 type TransferAccount = {
-  label: string;
   bank: string;
   number: string;
   name: string;
 };
 
-const giftContent: Record<GiftMethodKey, any> = {
-  transfer: {
-    label: "Transfer Bank",
-    title: "Kado Melalui Rekening",
-    accounts: [
-      {
-        bank: "MANDIRI",
-        number: "1060017159230",
-        name: "M.ADAM RIZKI IRAWAN",
-      },
-      {
-        bank: "SEA BANK",
-        number: "901745647962",
-        name: "RISMA HAYATI",
-      },
-    ] as TransferAccount[],
-    note: "THANK YOU FOR YOUR GIFT. 🤍",
-  },
-
-  qr: {
-    label: "QR Code",
-    title: "QRIS",
-    qrImage: "/images/qr-code.jpeg", // Ganti ke src QR kamu
-    note: "Thank You For Your Gift. 🤍",
-  },
-
-  physical: {
-    label: "Kado",
-    title: "Pengiriman Kado Fisik",
-    rows: [
-      { label: "Alamat", value: "Simpang Matapao (Bakso Wongso)" },
-      { label: "Kota", value: "Kab. Serdang Bedagai, Kec. Teluk Mengkudu" },
-      { label: "Penerima", value: "Risma Hayati" },
-    ],
-  },
+type PhysicalRow = {
+  label: string;
+  value: string;
 };
 
-export function GiftSection() {
-  const [active, setActive] = useState<GiftMethodKey>("transfer");
 
-  const data = giftContent[active];
+export function GiftSection({ slug }: Props) {
+
+  const invite = invitations[slug];
+  if (!invite) return null;
+
+  const giftContent = {
+    transfer: {
+      title: "Kado Melalui Rekening",
+      accounts: invite.gift?.transfer ?? [],
+      note: "THANK YOU FOR YOUR GIFT 🤍",
+    },
+    qr: {
+      title: "QRIS",
+      qrImage: invite.gift?.qrImage ?? null,
+      note: "Thank You For Your Gift 🤍",
+    },
+    physical: {
+      title: "Pengiriman Kado Fisik",
+      rows: invite.gift?.physical ?? [],
+    },
+  };
+
+  const availableTabs: [GiftMethodKey, string][] = [];
+
+  if (giftContent.transfer.accounts.length) {
+    availableTabs.push(["transfer", "Transfer"]);
+  }
+
+  if (giftContent.qr.qrImage) {
+    availableTabs.push(["qr", "QR Code"]);
+  }
+
+  if (giftContent.physical.rows.length) {
+    availableTabs.push(["physical", "Kado Fisik"]);
+  }
+
+  const [active, setActive] = useState<GiftMethodKey>(
+    availableTabs[0]?.[0] ?? "transfer"
+  );
 
   const copyText = (text: string) => {
     if (navigator?.clipboard) {
       navigator.clipboard.writeText(text);
     }
   };
+
 
   return (
     <section className="relative w-full bg-black/30 backdrop-blur-sm py-20 px-6 overflow-hidden">
@@ -92,14 +103,9 @@ export function GiftSection() {
 
         {/* Tabs */}
         <div className="inline-flex items-center justify-center gap-2 rounded-full bg-white/5 border border-white/15 p-1.5 mb-7 backdrop-blur-xl">
-          {(
-            [
-              ["transfer", "Transfer"],
-              ["qr", "QR Code"],
-              ["physical", "Kado Fisik"],
-            ] as [GiftMethodKey, string][]
-          ).map(([key, label]) => {
-            const activeTab = key === active;
+        
+          {availableTabs.map(([key, label]) => {
+  const activeTab = key === active;
             return (
               <button
                 key={key}
@@ -132,17 +138,14 @@ export function GiftSection() {
             className="mx-auto max-w-xl rounded-3xl border border-white/15 bg-linear-to-br from-white/10 via-white/5 to-white/0 p-6 md:p-7 text-left backdrop-blur-2xl shadow-[0_18px_55px_rgba(0,0,0,0.7)]"
           >
             {/* Header */}
-            <h3 className="text-lg md:text-xl font-semibold text-white mb-1">
-              {data.title}
+            <h3 className="text-lg md:text-xl font-semibold text-white mb-4">
+              {giftContent[active].title}
             </h3>
-            <p className="text-xs md:text-sm text-white/70 leading-relaxed mb-4">
-              {data.subtitle}
-            </p>
 
             {/* TRANSFER — multiple accounts */}
             {active === "transfer" && (
               <div className="space-y-4">
-                {data.accounts.map((acc: TransferAccount, idx: number) => (
+                {giftContent.transfer.accounts.map((acc: TransferAccount, idx: number) => (
                   <div
                     key={idx}
                     className="rounded-2xl border border-white/15 bg-white/5 p-4"
@@ -164,11 +167,11 @@ export function GiftSection() {
             )}
 
             {/* QR — Large Image Only */}
-{active === "qr" && (
+{active === "qr" && giftContent.qr.qrImage && (
   <div className="flex flex-col items-center mt-3">
     <div className="h-56 w-56 md:h-64 md:w-64 rounded-2xl overflow-hidden border border-white/20 bg-white/10 flex items-center justify-center">
       <img
-        src="/images/qr-code.jpeg"    // pastikan file QR kamu ada di public/qr.png
+        src={giftContent.qr.qrImage}    // pastikan file QR kamu ada di public/qr.png
         alt="QR Code"
         className="w-full h-full object-cover"
       />
@@ -176,7 +179,7 @@ export function GiftSection() {
 
     {/* Tombol Download */}
     <a
-      href="/images/qr-code.jpeg"
+      href={giftContent.qr.qrImage}
       download="QR-Code-Mempelai.png"
       className="
         mt-4 inline-flex items-center justify-center gap-1.5
@@ -189,7 +192,7 @@ export function GiftSection() {
     </a>
 
     <p className="text-[11px] text-white/50 text-center mt-3 leading-relaxed">
-      {data.note}
+      {giftContent.qr.note}
     </p>
   </div>
 )}
@@ -198,7 +201,7 @@ export function GiftSection() {
             {/* PHYSICAL */}
             {active === "physical" && (
               <div className="mt-3 space-y-2.5">
-                {data.rows.map((row: any) => (
+                {giftContent.physical.rows.map((row: any) => (
                   <Row
                     key={row.label}
                     label={row.label}

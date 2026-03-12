@@ -2,8 +2,19 @@
 
 import { motion } from "framer-motion";
 import CountdownSection from "./CountdownSection";
+import { InvitationSlug } from "@/lib/types";
+import { invitations } from "@/lib/invitations";
 
-export function EventSection() {
+type Props = {
+  slug: InvitationSlug;
+};
+
+export function EventSection({slug}: Props) {
+
+  const data = invitations[slug];
+
+  if(!data) return null;
+
   return (
     <section className="w-full bg-black/30 backdrop-blur-sm py-14 sm:py-16 md:py-20 px-4 sm:px-6 text-center">
       <div className="max-w-3xl mx-auto">
@@ -64,12 +75,12 @@ export function EventSection() {
             className="flex justify-center mb-3 sm:mb-4"
           >
             <img
-              src="/images/logo.png"
+              src={data.logoImage}
               alt="Wedding Logo"
               className="
                 w-25 h-25 sm:w-20 sm:h-20
                 object-contain opacity-90
-                invert sepia saturate-200 hue-rotate-45 brightness-110
+                saturate-200 hue-rotate-45 brightness-110
               "
             />
           </motion.div>
@@ -94,10 +105,10 @@ export function EventSection() {
             className="mt-4 space-y-1"
           >
             <p className="text-sm sm:text-sm font-lora text-white/90 ">
-              Sabtu, 13 Desember 2025
+              {data.event.dayLabel}
             </p>
             <p className="text-xs sm:text-sm font-lora text-white/90">
-              08.00 WIB – Selesai
+              {data.event.time}
             </p>
           </motion.div>
 
@@ -109,8 +120,7 @@ export function EventSection() {
             viewport={{ once: true }}
             className="mt-4 text-xs sm:text-sm font-lora text-white/90 leading-relaxed"
           >
-            Jl. Medan - Tebing Tinggi, Liberia, <br />
-            Kec. Teluk Mengkudu
+            {data.event.location}
           </motion.p>
 
           {/* MAPS */}
@@ -123,7 +133,7 @@ export function EventSection() {
           >
             <div className="w-full">
               <iframe
-                src="https://www.google.com/maps?q=3.532500,99.087556&hl=es;z=14&output=embed"
+                src={data.event.mapEmbed}
                 className="w-full h-56 sm:h-64 md:h-72 rounded-xl shadow-lg border border-white/40"
                 loading="lazy"
                 allowFullScreen
@@ -134,7 +144,7 @@ export function EventSection() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              href="https://maps.google.com/?q=3.532500,99.087556"
+              href={data.event.mapLink}
               target="_blank"
               className="
                 mt-4
