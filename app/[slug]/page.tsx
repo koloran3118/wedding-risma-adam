@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import CoverHeroClient from "@/components/CoverHeroClient";
 import { invitations } from "@/lib/invitations";
 import type { Metadata } from "next";

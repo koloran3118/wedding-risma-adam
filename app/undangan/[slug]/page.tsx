@@ -1,4 +1,5 @@
 // app/undangan/[slug]/page.tsx
+export const runtime = "edge";
 
 import { Suspense } from "react";
 
