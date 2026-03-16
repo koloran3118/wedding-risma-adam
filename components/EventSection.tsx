@@ -85,7 +85,7 @@ export function EventSection({slug}: Props) {
             />
           </motion.div>
 
-          {/* TITLE CARD */}
+          {/* TITLE CARD AKAD*/}
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +93,7 @@ export function EventSection({slug}: Props) {
             viewport={{ once: true }}
             className="text-xl sm:text-2xl font-playfair font-semibold text-white"
           >
-            Akad Nikah &amp; Resepsi
+            Akad Nikah 
           </motion.h3>
 
           {/* DATE & TIME */}
@@ -105,10 +105,48 @@ export function EventSection({slug}: Props) {
             className="mt-4 space-y-1"
           >
             <p className="text-sm sm:text-sm font-lora text-white/90 ">
-              {data.event.dayLabel}
+              {data.event.akad.dayLabel}
             </p>
             <p className="text-xs sm:text-sm font-lora text-white/90">
-              {data.event.time}
+              {data.event.akad.time}
+            </p>
+          </motion.div>
+
+          {/* PLACE */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="mt-4 text-xs sm:text-sm font-lora text-white/90 leading-relaxed mb-10"
+          >
+            {data.event.akad.location}
+          </motion.p>
+
+          {/* TITLE CARD RESPSI */}
+          <motion.h3
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-xl sm:text-2xl font-playfair font-semibold text-white"
+          >
+            Resepsi 
+          </motion.h3>
+
+          {/* DATE & TIME */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-4 space-y-1"
+          >
+            <p className="text-sm sm:text-sm font-lora text-white/90 ">
+              {data.event.resepsi.dayLabel}
+            </p>
+            <p className="text-xs sm:text-sm font-lora text-white/90">
+              {data.event.resepsi.time}
             </p>
           </motion.div>
 
@@ -120,7 +158,7 @@ export function EventSection({slug}: Props) {
             viewport={{ once: true }}
             className="mt-4 text-xs sm:text-sm font-lora text-white/90 leading-relaxed"
           >
-            {data.event.location}
+            {data.event.resepsi.location}
           </motion.p>
 
           {/* MAPS */}
@@ -133,7 +171,7 @@ export function EventSection({slug}: Props) {
           >
             <div className="w-full">
               <iframe
-                src={data.event.mapEmbed}
+                src={data.event.akad.mapEmbed}
                 className="w-full h-56 sm:h-64 md:h-72 rounded-xl shadow-lg border border-white/40"
                 loading="lazy"
                 allowFullScreen
@@ -144,7 +182,7 @@ export function EventSection({slug}: Props) {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              href={data.event.mapLink}
+              href={data.event.akad.mapLink}
               target="_blank"
               className="
                 mt-4

@@ -92,7 +92,7 @@ export function ClosingSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.23 }}
-          className="text-2xl md:text-[28px] font-playfair text-white tracking-wide mb-6"
+          className="text-xl md:text-[28px] font-playfair text-white tracking mb-6"
         >
           {brideGroomNames}
         </motion.p>

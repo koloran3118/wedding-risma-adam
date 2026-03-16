@@ -88,7 +88,7 @@ export function BrideGroomSection({slug} : Props ) {
                 </p>
 
                 <a
-                  href="https://instagram.com/syugarisss"
+                  href={data.bride.instagram.iglink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
@@ -99,7 +99,7 @@ export function BrideGroomSection({slug} : Props ) {
                   "
                 >
                   <Instagram size={16} />
-                  <span>{data.bride.instagram}</span>
+                  <span>{data.bride.instagram.uname}</span>
                 </a>
               </div>
             </div>
@@ -131,13 +131,13 @@ export function BrideGroomSection({slug} : Props ) {
                 {data.bride.parents}
               </p>
               <a
-                href="https://instagram.com/syugarisss"
+                href={data.bride.instagram.iglink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center mt-2 gap-2 text-xs md:text-sm font-lora hover:text-amber-200 transition-colors"
               >
                 <Instagram size={16} />
-                <span>{data.bride.instagram}</span>
+                <span>{data.bride.instagram.uname}</span>
               </a>
             </div>
           </motion.div>
@@ -183,13 +183,13 @@ export function BrideGroomSection({slug} : Props ) {
                 {data.groom.parents}
               </p>
               <a
-                href="https://instagram.com/pakdomm"
+                href={data.groom.instagram.iglink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center mt-2 gap-2 text-xs md:text-sm font-lora hover:text-amber-200 transition-colors"
               >
                 <Instagram size={16} />
-                <span>{data.groom.instagram}</span>
+                <span>{data.groom.instagram.uname}</span>
               </a>
             </div>
           </motion.div>
@@ -237,7 +237,7 @@ export function BrideGroomSection({slug} : Props ) {
                 </p>
 
                 <a
-                  href="https://instagram.com/pakdomm"
+                  href={data.groom.instagram.iglink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
@@ -248,7 +248,7 @@ export function BrideGroomSection({slug} : Props ) {
                   "
                 >
                   <Instagram size={16} />
-                  <span>{data.groom.instagram}</span>
+                  <span>{data.groom.instagram.uname}</span>
                 </a>
               </div>
             </div>

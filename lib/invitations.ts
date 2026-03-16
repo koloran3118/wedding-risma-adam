@@ -6,15 +6,22 @@ export const invitations = {
       name: "Risma Hayati",
       uname: "Risma",
       parents: "Putri dari Bapak Hairul Rizal & Ibu Asnaini",
-      instagram: "syugarisss"
+      instagram: {
+        uname: "syugarisss",
+        iglink: "https://instagram.com/s_tresaeni"
+      },
     },
     groom: {
       name: "M. Adam Rizki Irawan",
       uname: "Adam",
       parents: "Putra dari Bapak Evo Agus Irawan & Ibu Nurhayati",
-      instagram: "pakdomm"
+      instagram: {
+        uname: "pakdomm",
+        iglink: "https://instagram.com/s_tresaeni"
+      },
     },
     event: {
+      akad: {
       dayLabel: "Sabtu, 13 Desember 2025",
       time: "08.00 WIB – Selesai",
 
@@ -26,6 +33,20 @@ Kec. Teluk Mengkudu`,
 
       mapLink:
         "https://maps.google.com/?q=3.532500,99.087556"
+      },
+      resepsi: {
+      dayLabel: "Sabtu, 13 Desember 2025",
+      time: "08.00 WIB – Selesai",
+
+      location: `Jl. Medan - Tebing Tinggi, Liberia,
+Kec. Teluk Mengkudu`,
+
+      mapEmbed:
+        "https://www.google.com/maps?q=3.532500,99.087556&hl=es;z=14&output=embed",
+
+      mapLink:
+        "https://maps.google.com/?q=3.532500,99.087556"
+      },
     },
     galery: {
         ft1: "/images/image1.jpeg",
@@ -64,21 +85,28 @@ Kec. Teluk Mengkudu`,
   },
 
   "shinta-ali": {
-    heroBackground: "/images/shintaali/IMG-20260308-WA0022.jpg",
+    heroBackground: "/images/shintaali/cover.png",
     logoImage: "/images/shintaali/logo.png",
     bride: {
       name: "Shinta Tresaeni",
       uname: "Shinta",
       parents: "Putri Pertama dari Bapak Sutrisno & Ibu Sairah",
-      instagram: "shinta"
+      instagram: {
+        uname: "s_tresaeni",
+        iglink: "https://instagram.com/s_tresaeni"
+      },
     },
     groom: {
       name: "Ali Pudin",
       uname: "Ali",
       parents: "Putra Kedua dari Bapak Kusnadi & Ibu Rokhimah",
-      instagram: "alipudin"
+      instagram: {
+        uname: "pudin3977",
+        iglink: "https://instagram.com/pudin3977"
+      },
     },
     event: {
+      akad:{
       dayLabel: "Kamis, 26 Maret 2026",
       time: "08.00 WIB – Selesai",
 
@@ -89,6 +117,19 @@ Kec. Teluk Mengkudu`,
 
       mapLink:
         "https://maps.google.com/?q=-6.860224,109.128173"
+      },
+      resepsi:{
+      dayLabel: "Kamis, 26 Maret 2026",
+      time: "09.00 WIB – Selesai",
+
+      location: `Jl. Sepat Gang Muji Jaya RT 06/05 No.18 `,
+
+      mapEmbed:
+        "https://www.google.com/maps?q=-6.860224,109.128173&hl=es;z=14&output=embed",
+
+      mapLink:
+        "https://maps.google.com/?q=-6.860224,109.128173"
+      },
     },
     
     galery: {
@@ -117,7 +158,7 @@ Kec. Teluk Mengkudu`,
     qrImage: null,
 
     physical: [
-        { label: "Alamat", value: "Jl. Sepat gang muji, RT 06/05, No.18" },
+        { label: "Alamat", value: "Jl. Sepat, Gang Muji Jaya, RT 06/05, No.18" },
         { label: "Kota", value: "Tegal" },
         { label: "Penerima", value: "Shinta Tresaeni / Ibu Sairah" }
     ]
