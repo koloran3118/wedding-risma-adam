@@ -134,9 +134,9 @@ Kec. Teluk Mengkudu`,
     
     galery: {
         ft1: "/images/shintaali/galery1.jpg",
-        ft2: "/images/shintaali/galery2.jpg",
-        ft3: "/images/shintaali/galery3.jpg",
-        ft4: "/images/shintaali/galery4.jpg",
+        ft2: "/images/shintaali/galery2.JPG",
+        ft3: "/images/shintaali/galery3.JPG",
+        ft4: "/images/shintaali/galery4.JPG",
         ft5: "/images/shintaali/galery5.jpg",
         ft6: "/images/shintaali/16R.jpg",  
     },
