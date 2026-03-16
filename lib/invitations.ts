@@ -133,12 +133,12 @@ Kec. Teluk Mengkudu`,
     },
     
     galery: {
-        ft1: "/images/shintaali/IMG-20260308-WA0021.jpg",
-        ft2: "/images/shintaali/IMG-20260308-WA0022.jpg",
-        ft3: "/images/shintaali/IMG-20260308-WA0023.jpg",
-        ft4: "/images/shintaali/IMG-20260308-WA0024.jpg",
-        ft5: "/images/shintaali/IMG-20260308-WA0025.jpg",
-        ft6: "/images/shintaali/IMG-20260308-WA0022.jpg",  
+        ft1: "/images/shintaali/galery1.jpg",
+        ft2: "/images/shintaali/galery2.jpg",
+        ft3: "/images/shintaali/galery3.jpg",
+        ft4: "/images/shintaali/galery4.jpg",
+        ft5: "/images/shintaali/galery5.jpg",
+        ft6: "/images/shintaali/16R.jpg",  
     },
 
     gift: {
