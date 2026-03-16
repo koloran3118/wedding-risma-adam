@@ -120,7 +120,7 @@ Kec. Teluk Mengkudu`,
       },
       resepsi:{
       dayLabel: "Kamis, 26 Maret 2026",
-      time: "09.00 WIB – Selesai",
+      time: "11.00 WIB – Selesai",
 
       location: `Jl. Sepat Gang Muji Jaya RT 06/05 No.18 `,
 
